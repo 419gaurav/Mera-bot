@@ -23,4 +23,19 @@ jobs:
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
-          
+          import requests
+import os
+
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+CHAT_ID = os.getenv("CHAT_ID")  # channel ka numeric ID ya @channelusername
+MESSAGE = "✅ Test message from GitHub Actions!"
+
+url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
+data = {"chat_id": CHAT_ID, "text": MESSAGE}
+
+r = requests.post(url, data=data)
+
+# Debugging ke liye response print karo
+print("Status Code:", r.status_code)
+print("Response:", r.text)
+
